@@ -5,14 +5,12 @@ import {Provider} from 'mobx-react';
 
 import App from './components/App';
 
-import productsStore from './stores/products';
-import orderStore from './stores/order';
+import store from './store';
 
 useStrict(true);
 
 ReactDOM.render(
-    <Provider products={productsStore}
-              order={orderStore}>
+    <Provider store={store}>
         <App/>
     </Provider>,
     document.getElementById('root')

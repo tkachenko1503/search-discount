@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
+import {computed} from 'mobx';
 import {observer, inject} from 'mobx-react';
+import pathOr from 'ramda/src/pathOr';
 
 import Amount from '../components/Amount';
-import {addOrderItem} from '../stores/order/actions';
 
-@inject('order')
+const amountOrZero = pathOr(0, ['amount']);
+
+@inject('store')
 @observer
 class ProductAmount extends Component {
     constructor(props) {
@@ -14,15 +17,23 @@ class ProductAmount extends Component {
     }
 
     addProduct({target}) {
-        const {order, productId} = this.props;
-        const amount = target.value;
+        const {store, productId} = this.props;
+        const amount = parseInt(target.value, 10);
 
-        addOrderItem(order, productId, amount);
+        store.addOrderItem(productId, amount);
+    }
+
+    @computed get currentAmount() {
+        const {store, productId} = this.props;
+        const item = store.orderItems[productId];
+
+        return amountOrZero(item);
     }
 
     render() {
         return (
-            <Amount onChange={this.addProduct}/>
+            <Amount value={this.currentAmount}
+                    onChange={this.addProduct}/>
         );
     }
 }

@@ -5,11 +5,12 @@ import styles from './Amount.module.css';
 
 class Amount extends Component {
     render() {
-        const {onChange} = this.props;
+        const {value, onChange} = this.props;
 
         return (
             <InputGroup className={styles.amount}>
                 <FormControl type="number"
+                             value={value}
                              onChange={onChange}/>
 
                 <InputGroup.Addon>шт.</InputGroup.Addon>

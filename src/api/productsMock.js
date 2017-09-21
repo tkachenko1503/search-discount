@@ -3,30 +3,30 @@ export default {
         id: 1,
         name: 'Kakashka',
         price: 100,
-        discount: 35
+        discount: 15
     },
     2: {
         id: 2,
         name: 'Sosulka',
-        price: 150,
+        price: 200,
         discount: 15
     },
     3: {
         id: 3,
-        name: 'Holodez',
-        price: 300,
-        discount: 20
+        name: 'Teplaya Pyska',
+        price: 150,
+        discount: 50
     },
     4: {
         id: 4,
-        name: 'Krab',
-        price: 50,
-        discount: 8
+        name: 'Kakuli',
+        price: 25,
+        discount: 15
     },
     5: {
         id: 5,
-        name: 'Ogurechik',
-        price: 25,
-        discount: 0
+        name: 'Teplie Kakuli',
+        price: 300,
+        discount: 20
     }
-}
+};
