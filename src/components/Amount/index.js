@@ -1,19 +1,21 @@
 import React, {Component} from 'react';
 import {InputGroup, FormControl} from 'react-bootstrap';
 
-import styles from './ProductAmount.module.css';
+import styles from './Amount.module.css';
 
-class ProductAmount extends Component {
+class Amount extends Component {
     render() {
-        const {product} = this.props;
+        const {onChange} = this.props;
 
         return (
             <InputGroup className={styles.amount}>
-                <FormControl type="number"/>
+                <FormControl type="number"
+                             onChange={onChange}/>
+
                 <InputGroup.Addon>шт.</InputGroup.Addon>
             </InputGroup>
         );
     }
 }
 
-export default ProductAmount;
+export default Amount;

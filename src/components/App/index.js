@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import DevTools from 'mobx-react-devtools';
 
 import ProductSearchForm from '../ProductSearchForm';
-import ProductsTable from '../ProductsTable';
+import ProductsOrder from '../../containers/ProductsOrder';
 
 import styles from './App.module.css';
 
@@ -16,7 +16,7 @@ class App extends Component {
 
                 <ProductSearchForm className={styles.search}/>
 
-                <ProductsTable/>
+                <ProductsOrder/>
             </div>
         );
     }
