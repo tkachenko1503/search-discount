@@ -2,7 +2,7 @@ import store from '../store';
 
 import productsMock from './productsMock';
 
-class Api {
+export class Api {
     constructor(store) {
         this._store = store;
     }

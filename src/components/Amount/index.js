@@ -1,22 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {InputGroup, FormControl} from 'react-bootstrap';
 
 import styles from './Amount.module.css';
 
-class Amount extends Component {
-    render() {
-        const {value, onChange} = this.props;
+const Amount = ({value, onChange}) => {
+    return (
+        <InputGroup className={styles.amount}>
+            <FormControl type="number"
+                         value={value}
+                         onChange={onChange}/>
 
-        return (
-            <InputGroup className={styles.amount}>
-                <FormControl type="number"
-                             value={value}
-                             onChange={onChange}/>
-
-                <InputGroup.Addon>шт.</InputGroup.Addon>
-            </InputGroup>
-        );
-    }
-}
+            <InputGroup.Addon>шт.</InputGroup.Addon>
+        </InputGroup>
+    );
+};
 
 export default Amount;

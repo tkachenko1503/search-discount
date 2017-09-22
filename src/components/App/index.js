@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import DevTools from 'mobx-react-devtools';
 
 import ProductsList from '../ProductsList';
@@ -10,24 +10,22 @@ import ProductSearch from '../../containers/ProductSearch';
 
 import styles from './App.module.css';
 
-class App extends Component {
-    render() {
-        return (
-            <div className="container">
-                <DevTools/>
+const App = () => {
+    return (
+        <div className="container">
+            <DevTools/>
 
-                <h2 className={styles.logo}>
-                    Hello
-                </h2>
+            <h2 className={styles.logo}>
+                Hello
+            </h2>
 
-                <ProductSearch className={styles.search}/>
+            <ProductSearch className={styles.search}/>
 
-                <Products as={ProductsList}/>
+            <Products as={ProductsList}/>
 
-                <Order as={ProdutsOrder}/>
-            </div>
-        );
-    }
-}
+            <Order as={ProdutsOrder}/>
+        </div>
+    );
+};
 
 export default App;
