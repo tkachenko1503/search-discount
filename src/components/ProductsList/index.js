@@ -4,11 +4,11 @@ import map from 'ramda/src/map';
 import values from 'ramda/src/values';
 import pipe from 'ramda/src/pipe';
 
-import Product from '../Product';
+import ProductListItem from '../ProductListItem';
 
 const makeProducts = pipe(
     values,
-    map(product => <Product key={product.id} product={product}/>)
+    map(product => <ProductListItem key={product.id} product={product}/>)
 );
 
 class ProductsList extends Component {

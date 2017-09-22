@@ -1,16 +1,9 @@
 import {observable, computed, action} from 'mobx';
-import reduce from 'ramda/src/reduce';
 import assoc from 'ramda/src/assoc';
-
-const sumPrices = (total, {price}) => total + price;
 
 class Store {
     @observable products = {};
     @observable orderItems = {};
-
-    @computed get orderTotal() {
-        return reduce(sumPrices, 0, this.orderItems);
-    }
 
     @action
     resetProducts(newProducts) {

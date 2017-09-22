@@ -7,7 +7,7 @@ class Api {
         this._store = store;
     }
 
-    fetchProducts() {
+    fetchProducts(productName) {
         setTimeout(() => this._store.resetProducts(productsMock), 2000);
     }
 }

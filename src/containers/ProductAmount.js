@@ -10,20 +10,15 @@ const amountOrZero = pathOr(0, ['amount']);
 @inject('store')
 @observer
 class ProductAmount extends Component {
-    constructor(props) {
-        super(props);
-
-        this.addProduct = this.addProduct.bind(this);
-    }
-
-    addProduct({target}) {
+    addProduct = event => {
         const {store, productId} = this.props;
-        const amount = parseInt(target.value, 10);
+        const amount = parseInt(event.target.value, 10);
 
         store.addOrderItem(productId, amount);
-    }
+    };
 
-    @computed get currentAmount() {
+    @computed
+    get currentAmount() {
         const {store, productId} = this.props;
         const item = store.orderItems[productId];
 

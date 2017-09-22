@@ -1,24 +1,22 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 
-import ProductsList from '../components/ProductsList';
-
 import api from '../api';
 
 @inject('store')
 @observer
-class ProductsOrder extends Component {
+class Products extends Component {
     componentDidMount() {
         api.fetchProducts();
     }
 
     render() {
-        const {store} = this.props;
+        const {store, as: Component} = this.props;
 
         return (
-            <ProductsList products={store.products}/>
+            <Component products={store.products}/>
         );
     }
 }
 
-export default ProductsOrder;
+export default Products;

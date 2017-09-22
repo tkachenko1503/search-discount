@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import DevTools from 'mobx-react-devtools';
 
-import ProductSearchForm from '../ProductSearchForm';
+import ProductsList from '../ProductsList';
+import ProdutsOrder from '../ProdutsOrder';
 
-import ProductsOrder from '../../containers/ProductsOrder';
+import Products from '../../containers/Products';
+import Order from '../../containers/Order';
+import ProductSearch from '../../containers/ProductSearch';
 
 import styles from './App.module.css';
 
@@ -13,11 +16,15 @@ class App extends Component {
             <div className="container">
                 <DevTools/>
 
-                <h2 className={styles.logo}>Hello</h2>
+                <h2 className={styles.logo}>
+                    Hello
+                </h2>
 
-                <ProductSearchForm className={styles.search}/>
+                <ProductSearch className={styles.search}/>
 
-                <ProductsOrder/>
+                <Products as={ProductsList}/>
+
+                <Order as={ProdutsOrder}/>
             </div>
         );
     }

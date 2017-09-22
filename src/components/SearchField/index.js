@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Form, FormGroup, FormControl} from 'react-bootstrap';
 
-class ProductSearchForm extends Component {
+class SearchField extends Component {
     render() {
         const {value, onChange, className} = this.props;
 
@@ -9,8 +9,8 @@ class ProductSearchForm extends Component {
             <Form className={className}>
                 <FormGroup>
                     <FormControl type="text"
+                                 placeholder="Введите название товара"
                                  value={value}
-                                 placeholder="Введите текст"
                                  onChange={onChange}/>
                 </FormGroup>
             </Form>
@@ -18,4 +18,4 @@ class ProductSearchForm extends Component {
     }
 }
 
-export default ProductSearchForm;
+export default SearchField;

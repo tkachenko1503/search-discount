@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import ProductAmount from '../../containers/ProductAmount';
 
-class Product extends Component {
+class ProductListItem extends Component {
     render() {
         const {product} = this.props;
 
@@ -19,4 +19,4 @@ class Product extends Component {
     }
 }
 
-export default Product;
+export default ProductListItem;
