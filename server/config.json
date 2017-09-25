@@ -1,0 +1,11 @@
+{
+  "PORT": 8090,
+  "MONGO_URI": "mongodb://localhost/test",
+  "APP_ID": "app-id",
+  "MASTER_KEY": "master-key",
+  "JAVASCRIPT_KEY": "js-key",
+  "SUPER_ADMIN": {
+    "user": "GodOfBeton",
+    "pass": "beton-beneton"
+  }
+}
