@@ -1,6 +1,12 @@
 import store from '../store';
+import Parse from 'parse';
 
-import productsMock from './productsMock';
+const devPort = 8090;
+const hostname = window.location.hostname;
+const url = window.location.protocol + '//' + hostname;
+
+Parse.initialize('app-id', 'js-key');
+Parse.serverURL = (hostname === 'localhost' ? url + ':' + devPort : url) + '/parse';
 
 export class Api {
     constructor(store) {
@@ -8,7 +14,21 @@ export class Api {
     }
 
     fetchProducts(productName) {
-        setTimeout(() => this._store.resetProducts(productsMock), 2000);
+        setTimeout(() => this._store.resetProducts({}), 2000);
+    }
+
+    isAuthenticated() {
+        return Parse.User.current();
+    }
+
+    login({username, password}) {
+        return Parse.User
+            .logIn(username, password);
+    }
+
+    loguot() {
+        return Parse.User
+            .logOut();
     }
 }
 

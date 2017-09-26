@@ -8,8 +8,6 @@ import pipe from 'ramda/src/pipe';
 import pick from 'ramda/src/pick';
 import values from 'ramda/src/values';
 
-import api from '../api';
-
 const sumPrices = (total, {price}) => total + price;
 const keysLength = pipe(keys, length);
 
