@@ -16,14 +16,22 @@ const redirectOnAnonim = Component =>
     props => (
         api.isAuthenticated() ?
             <Component {...props}/> :
-            <Redirect to={{
-                pathname: '/login',
-                state: {from: props.location}
-            }}/>
+            <Redirect to="/login"/>
+    );
+
+const redirectOnAuth = Component =>
+    props => (
+        api.isAuthenticated() ?
+            <Redirect to="/"/> :
+            <Component {...props}/>
     );
 
 const PrivateRoute = ({component: Component, ...rest}) => (
     <Route {...rest} render={redirectOnAnonim(Component)}/>
+);
+
+const AnonimRoute = ({component: Component, ...rest}) => (
+    <Route {...rest} render={redirectOnAuth(Component)}/>
 );
 
 ReactDOM.render(
@@ -32,7 +40,7 @@ ReactDOM.render(
             <div id="app">
                 <Switch>
                     <PrivateRoute exact path="/" component={App}/>
-                    <Route path="/login" component={LoginContainer}/>
+                    <AnonimRoute path="/login" component={LoginContainer}/>
                     <Redirect from="/*" to="/"/>
                 </Switch>
             </div>
