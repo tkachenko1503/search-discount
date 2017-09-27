@@ -1,0 +1,30 @@
+/*Margins, Paddings, Positioning, Sizing*/
+
+.fullPageHeight {
+    height: 100%;
+}
+
+.centered {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.flexCentered {
+    display: inline-block;
+    margin: auto;
+}
+
+.textCentered {
+    text-align: center;
+}
+
+.inOneLine {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.spacedM + .spacedM {
+    margin-top: 20px;
+}

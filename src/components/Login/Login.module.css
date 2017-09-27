@@ -1,0 +1,48 @@
+.login {
+    composes: beigeBack from '../../styles/color.module.css';
+    composes: fullPageHeight from '../../styles/layout.module.css';
+    display: flex;
+    min-width: 810px;
+}
+
+.loginContent {
+    composes: flexCentered from '../../styles/layout.module.css';
+}
+
+.loginPicture {
+    composes: inOneLine from '../../styles/layout.module.css';
+    width: 375px;
+    height: 309px;
+}
+
+.loginForm {
+    composes: inOneLine from '../../styles/layout.module.css';
+    composes: whiteBack from '../../styles/color.module.css';
+    composes: textCentered from '../../styles/layout.module.css';
+    width: 399px;
+    height: 309px;
+    padding: 40px 56px 30px;
+}
+
+.loginFormTitle {
+    margin: 5px 0 16px;
+}
+
+.loginInput {
+    composes: input from '../../styles/controls.module.css';
+}
+
+.loginFormGroup {
+    margin: 0;
+    composes: spacedM from '../../styles/layout.module.css';
+}
+
+.loginSubmit {
+    composes: primaryButton from '../../styles/controls.module.css';
+    width: 100%;
+}
+
+.loginBrand {
+    composes: textCentered from '../../styles/layout.module.css';
+    color: #CAC5B8;
+}

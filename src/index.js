@@ -29,7 +29,7 @@ const PrivateRoute = ({component: Component, ...rest}) => (
 ReactDOM.render(
     <Router>
         <Provider store={store}>
-            <div>
+            <div id="app">
                 <PrivateRoute exact
                               path="/"
                               component={App}/>
