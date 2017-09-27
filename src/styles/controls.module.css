@@ -14,8 +14,9 @@
 .primaryButton,
 .primaryButton:hover,
 .primaryButton:focus,
-.primaryButton:active {
-    background: #A34E17;
+.primaryButton:active,
+.primaryButton:active:hover {
+    background-color: #A34E17;
     border-radius: 0;
     border: none;
     box-shadow: none;
