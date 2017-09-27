@@ -26,6 +26,12 @@ const PrivateRoute = ({component: Component, ...rest}) => (
     <Route {...rest} render={redirectOnAnonim(Component)}/>
 );
 
+const NotFound = () => (
+    <Route render={() => (
+        <Redirect to={{pathname: '/'}}/>
+    )}/>
+);
+
 ReactDOM.render(
     <Router>
         <Provider store={store}>
@@ -36,6 +42,8 @@ ReactDOM.render(
 
                 <Route path="/login"
                        component={LoginContainer}/>
+
+                <NotFound />
             </div>
         </Provider>
     </Router>,

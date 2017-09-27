@@ -72,6 +72,10 @@ if (NODE_ENV === DEVELOP) {
 app.use('/parse', parse);
 app.use('/admin/dashboard', dashboard);
 
+app.use('/*', (req, res) => {
+    res.sendFile(path.resolve('build', 'index.html'));
+});
+
 // catch all errors
 app.use(catchError);
 
