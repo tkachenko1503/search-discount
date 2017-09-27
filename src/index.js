@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
 import {useStrict} from 'mobx';
 import {Provider} from 'mobx-react';
 
@@ -26,24 +26,15 @@ const PrivateRoute = ({component: Component, ...rest}) => (
     <Route {...rest} render={redirectOnAnonim(Component)}/>
 );
 
-const NotFound = () => (
-    <Route render={() => (
-        <Redirect to={{pathname: '/'}}/>
-    )}/>
-);
-
 ReactDOM.render(
     <Router>
         <Provider store={store}>
             <div id="app">
-                <PrivateRoute exact
-                              path="/"
-                              component={App}/>
-
-                <Route path="/login"
-                       component={LoginContainer}/>
-
-                <NotFound />
+                <Switch>
+                    <PrivateRoute exact path="/" component={App}/>
+                    <Route path="/login" component={LoginContainer}/>
+                    <Redirect from="/*" to="/"/>
+                </Switch>
             </div>
         </Provider>
     </Router>,
