@@ -1,12 +1,7 @@
 import store from '../store';
-import Parse from 'parse';
-
-const devPort = 8090;
-const hostname = window.location.hostname;
-const url = window.location.protocol + '//' + hostname;
-
-Parse.initialize('app-id', 'js-key');
-Parse.serverURL = (hostname === 'localhost' ? url + ':' + devPort : url) + '/parse';
+import Parse from './Parse';
+import Modification from '../models/Modification';
+import {normalizeModifications} from './utils';
 
 export class Api {
     constructor(store) {
@@ -14,7 +9,10 @@ export class Api {
     }
 
     fetchProducts(productName) {
-        setTimeout(() => this._store.resetProducts({}), 2000);
+        Modification
+            .findModifications()
+            .then(normalizeModifications)
+            .then(entities => this._store.resetEntities(entities));
     }
 
     isAuthenticated() {

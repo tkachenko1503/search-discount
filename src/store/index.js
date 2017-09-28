@@ -2,12 +2,17 @@ import {observable, action} from 'mobx';
 import assoc from 'ramda/src/assoc';
 
 class Store {
-    @observable products = {};
+    @observable entities = {};
     @observable orderItems = {};
 
     @action
     resetProducts(newProducts) {
         this.products = newProducts;
+    }
+
+    @action
+    resetEntities({entities}) {
+        this.entities = entities;
     }
 
     @action

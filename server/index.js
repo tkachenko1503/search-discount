@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import {ParseServer} from 'parse-server';
 import ParseDashboard from 'parse-dashboard';
+import morgan from 'morgan';
 
 import config from './config.json';
 
@@ -61,10 +62,10 @@ const catchError = (err, req, res) => {
 
 // setup for different env
 if (NODE_ENV === DEVELOP) {
-    // app.use(morgan('dev'));
+    app.use(morgan('dev'));
     app.use(express.static(path.resolve('build/')));
 } else {
-    // app.use(morgan('combined'));
+    app.use(morgan('combined'));
     app.use(express.static(path.resolve('build/'), {maxAge: ONE_DAY}));
 }
 
