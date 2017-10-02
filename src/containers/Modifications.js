@@ -7,20 +7,20 @@ import pipe from 'ramda/src/pipe';
 import filter from 'ramda/src/filter';
 import propEq from 'ramda/src/propEq';
 
-const products = pathOr([], ['entities', 'product']);
+const modifications = pathOr([], ['entities', 'modification']);
 
 @inject('store')
 @observer
 class ProductsByCategory extends Component {
     @computed
-    get categoryProducts() {
-        const {store, categoryId} = this.props;
-        const findProducts = pipe(
-            products,
-            filter(propEq('category', categoryId))
+    get productModifications() {
+        const {store, productId} = this.props;
+        const findModifications = pipe(
+            modifications,
+            filter(propEq('product', productId))
         );
 
-        return findProducts(store);
+        return findModifications(store);
     }
 
     render() {
@@ -29,7 +29,7 @@ class ProductsByCategory extends Component {
 
         return (
             <Component {...props}
-                       products={this.categoryProducts}/>
+                       modifications={this.productModifications}/>
         );
     }
 }

@@ -1,0 +1,21 @@
+.login {
+    composes: beigeBack from '../../styles/color.module.css';
+    composes: fullPageHeight from '../../styles/layout.module.css';
+    display: flex;
+    min-width: 810px;
+}
+
+.loginContent {
+    composes: flexCentered from '../../styles/layout.module.css';
+}
+
+.loginPicture {
+    composes: inOneLine from '../../styles/layout.module.css';
+    width: 375px;
+    height: 309px;
+}
+
+.loginBrand {
+    composes: textCentered from '../../styles/layout.module.css';
+    color: #CAC5B8;
+}

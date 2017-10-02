@@ -7,10 +7,9 @@ const Amount = ({value, onChange}) => {
     return (
         <InputGroup className={styles.amount}>
             <FormControl type="number"
+                         className={styles.amountControl}
                          value={value}
                          onChange={onChange}/>
-
-            <InputGroup.Addon>шт.</InputGroup.Addon>
         </InputGroup>
     );
 };

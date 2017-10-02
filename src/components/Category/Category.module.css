@@ -1,0 +1,8 @@
+.category + .category {
+    margin-top: 30px;
+}
+
+.categoryTitle {
+    margin-top: 0;
+    margin-bottom: 30px;
+}

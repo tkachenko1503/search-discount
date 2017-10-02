@@ -1,0 +1,13 @@
+.summary {
+    margin-top: 35px;
+}
+
+.checkout {
+    composes: primaryButton from '../../styles/controls.module.css';
+    width: 285px;
+}
+
+.clientTotal {
+    margin-right: 60px;
+    margin-top: 12px;
+}

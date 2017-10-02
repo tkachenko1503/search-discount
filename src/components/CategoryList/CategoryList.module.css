@@ -1,0 +1,5 @@
+.categories {
+    composes: whiteBack from '../../styles/color.module.css';
+    padding: 35px 18px 20px;
+    min-height: 560px;
+}

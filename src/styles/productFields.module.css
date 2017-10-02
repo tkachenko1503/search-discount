@@ -1,0 +1,25 @@
+.fields {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nameField {
+    flex: 2 0 255px;
+}
+
+.sizeField {
+    flex: 1 0 144px;
+}
+
+.weightField {
+    flex: 1 0 101px;
+}
+
+.priceField {
+    flex: 1 0 140px;
+}
+
+.quantityField {
+    flex: 1 0 125px;
+}

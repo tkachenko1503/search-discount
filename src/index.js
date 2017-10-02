@@ -5,8 +5,8 @@ import {useStrict} from 'mobx';
 import {Provider} from 'mobx-react';
 
 import api from './api';
-import App from './components/App';
-import LoginContainer from './containers/LoginContainer';
+import SearchPage from './components/SearchPage';
+import LoginPage from './components/LoginPage';
 
 import store from './store';
 
@@ -39,8 +39,8 @@ ReactDOM.render(
         <Provider store={store}>
             <div id="app">
                 <Switch>
-                    <PrivateRoute exact path="/" component={App}/>
-                    <AnonimRoute path="/login" component={LoginContainer}/>
+                    <PrivateRoute exact path="/" component={SearchPage}/>
+                    <AnonimRoute path="/login" component={LoginPage}/>
                     <Redirect from="/*" to="/"/>
                 </Switch>
             </div>

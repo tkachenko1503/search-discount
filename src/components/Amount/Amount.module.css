@@ -1,3 +1,7 @@
 .amount {
-    width: 120px;
+    width: 64px;
+}
+
+.amountControl {
+    composes: input from '../../styles/controls.module.css';
 }

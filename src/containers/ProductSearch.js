@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {observable, action, autorun} from 'mobx';
 import {observer, inject} from 'mobx-react';
-
-import SearchField from '../components/SearchField';
+import omit from 'ramda/src/omit';
 
 import api from '../api';
 
@@ -13,7 +12,7 @@ class ProductSearch extends Component {
 
     disposeSearch = autorun(_ => {
         if (this.productName.length > 3) {
-            api.fetchProducts(this.productName);
+            api.findProductsByName(this.productName);
         }
     });
 
@@ -22,15 +21,22 @@ class ProductSearch extends Component {
         this.productName = event.target.value;
     };
 
+    componentDidMount() {
+        api.fetchEntities();
+    }
+
     componentWillUnmount() {
         this.disposeSearch();
     }
 
     render() {
+        const {as: Component} = this.props;
+        const props = omit(['as'], this.props);
+
         return (
-            <SearchField className={this.props.className}
-                         value={this.productName}
-                         onChange={this.setUserInput}/>
+            <Component {...props}
+                       value={this.productName}
+                       onChange={this.setUserInput}/>
         );
     }
 }

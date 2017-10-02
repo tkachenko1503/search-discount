@@ -1,0 +1,7 @@
+.modification {
+    padding: 5px 0;
+}
+
+.modification + .modification {
+    border-top: 1px solid #000000;
+}

@@ -1,0 +1,19 @@
+.search {
+    composes: beigeBack from '../../styles/color.module.css';
+    min-height: 100%;
+    padding-bottom: 30px;
+}
+
+.searchContent {
+    max-width: 785px;
+    min-width: 740px;
+    margin: 0 auto;
+}
+
+.searchLogo {
+    composes: textCentered from '../../styles/layout.module.css';
+    composes: greyText from '../../styles/color.module.css';
+    font-size: 48px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}

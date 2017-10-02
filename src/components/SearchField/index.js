@@ -1,12 +1,16 @@
 import React from 'react';
 import {Form, FormGroup, FormControl} from 'react-bootstrap';
 
-const SearchField = ({value, onChange, className}) => {
+import styles from './SearchField.module.css';
+
+const SearchField = ({value, onChange}) => {
     return (
-        <Form className={className}>
+        <Form className={styles.searchForm}>
             <FormGroup>
                 <FormControl type="text"
-                             placeholder="Введите название товара"
+                             bsSize="large"
+                             placeholder="Быстрый поиск"
+                             className={styles.searchControl}
                              value={value}
                              onChange={onChange}/>
             </FormGroup>

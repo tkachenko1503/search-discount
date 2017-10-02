@@ -8,7 +8,9 @@ export class Api {
         this._store = store;
     }
 
-    fetchProducts(productName) {
+    findProductsByName(productName) {}
+
+    fetchEntities() {
         Modification
             .findModifications()
             .then(normalizeModifications)

@@ -1,0 +1,7 @@
+.searchControl {
+    composes: input from '../../styles/controls.module.css';
+}
+
+.searchForm {
+    margin-bottom: 40px;
+}

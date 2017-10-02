@@ -3,13 +3,13 @@ import {observable, action} from 'mobx';
 import {observer, inject} from 'mobx-react';
 import {withRouter} from 'react-router-dom';
 import path from 'ramda/src/path';
+import omit from 'ramda/src/omit';
 
 import api from '../api';
-import Login from '../components/Login';
 
 @inject('store')
 @observer
-class LoginContainer extends Component {
+class Login extends Component {
     @observable formError = null;
 
     @action
@@ -36,12 +36,15 @@ class LoginContainer extends Component {
     };
 
     render() {
-        const Component = this.props.as || Login;
+        const Component = this.props.as;
+        const props = omit(['as'], this.props);
 
         return (
-            <Component onSubmit={this.loginUser} error={this.formError}/>
+            <Component {...props}
+                       onSubmit={this.loginUser}
+                       error={this.formError}/>
         );
     }
 }
 
-export default withRouter(LoginContainer);
+export default withRouter(Login);

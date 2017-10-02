@@ -5,11 +5,13 @@ import reduce from 'ramda/src/reduce';
 import keys from 'ramda/src/keys';
 import length from 'ramda/src/length';
 import pipe from 'ramda/src/pipe';
-import pick from 'ramda/src/pick';
 import values from 'ramda/src/values';
+import omit from 'ramda/src/omit';
+import pathOr from 'ramda/src/pathOr';
 
-const sumPrices = (total, {price}) => total + price;
 const keysLength = pipe(keys, length);
+const modifications = pathOr([], ['entities', 'modification']);
+const orderItems = pathOr([], ['orderItems']);
 
 @inject('store')
 @observer
@@ -17,11 +19,16 @@ class Order extends Component {
     @computed
     get total() {
         const {store} = this.props;
-        const items = keys(store.orderItems);
-        const products = pick(items, store.products);
-        const productsList = values(products);
+        const items = orderItems(store);
+        const itemsList = values(items);
+        const allModifications = modifications(store);
 
-        return reduce(sumPrices, 0, productsList);
+        return reduce(
+            (total, {modificationId, amount}) => {
+                const modification = allModifications[modificationId];
+
+                return total + (amount * modification.price);
+            }, 0, itemsList);
     }
 
     @computed
@@ -38,8 +45,11 @@ class Order extends Component {
             return null;
         }
 
+        const props = omit(['as'], this.props);
+
         return (
-            <Component total={this.total}/>
+            <Component {...props}
+                       total={this.total}/>
         );
     }
 }

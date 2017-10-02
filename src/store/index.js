@@ -16,18 +16,18 @@ class Store {
     }
 
     @action
-    addOrderItem(productId, amount) {
-        const item = this.orderItems[productId];
+    addOrderItem(modificationId, amount) {
+        const item = this.orderItems[modificationId];
 
         if (item) {
             item.amount = amount;
         } else {
             let newItem = observable({
-                productId,
+                modificationId,
                 amount
             });
 
-            this.orderItems = assoc(productId, newItem, this.orderItems);
+            this.orderItems = assoc(modificationId, newItem, this.orderItems);
         }
     }
 }
