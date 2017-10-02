@@ -13,12 +13,11 @@ class Modification extends Parse.Object {
         super('Modification');
     }
 
-    static findModifications() {
+    static queryWithEntities() {
         const query = new Parse.Query(Modification);
 
         return query
-            .include(['product.category'])
-            .find();
+            .include(['product.category']);
     }
 }
 

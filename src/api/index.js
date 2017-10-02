@@ -8,11 +8,19 @@ export class Api {
         this._store = store;
     }
 
-    findProductsByName(productName) {}
+    findProductsByName(productName) {
+        Modification
+            .queryWithEntities()
+            .matches('name', new RegExp(productName, 'i'))
+            .find()
+            .then(normalizeModifications)
+            .then(entities => this._store.resetEntities(entities));
+    }
 
     fetchEntities() {
         Modification
-            .findModifications()
+            .queryWithEntities()
+            .find()
             .then(normalizeModifications)
             .then(entities => this._store.resetEntities(entities));
     }

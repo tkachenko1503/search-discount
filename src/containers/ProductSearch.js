@@ -11,8 +11,14 @@ class ProductSearch extends Component {
     @observable productName = '';
 
     disposeSearch = autorun(_ => {
-        if (this.productName.length > 3) {
-            api.findProductsByName(this.productName);
+        const name = this.productName
+            .trim()
+            .replace(/[^a-zA-Zа-яА-ЯёЁ]/g, '');
+
+        if (name.length > 2) {
+            api.findProductsByName(name);
+        } else {
+            api.fetchEntities();
         }
     });
 
