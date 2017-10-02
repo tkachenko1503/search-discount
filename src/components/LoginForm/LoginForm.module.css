@@ -1,6 +1,6 @@
 .loginForm {
-    composes: inOneLine from '../../styles/layout.module.css';
     composes: whiteBack from '../../styles/color.module.css';
+    composes: inOneLine from '../../styles/layout.module.css';
     composes: textCentered from '../../styles/layout.module.css';
     width: 399px;
     height: 309px;
