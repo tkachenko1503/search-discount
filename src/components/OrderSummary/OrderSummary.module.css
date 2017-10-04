@@ -1,5 +1,13 @@
 .summary {
     margin-top: 35px;
+    position: relative;
+}
+
+.checkoutMessage {
+    height: 66px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .checkout {

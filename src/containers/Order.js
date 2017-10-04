@@ -24,9 +24,15 @@ class Order extends Component {
 
     checkoutOrder = () => {
         const document = htmlToPdf(this.htmlDoc);
-        const docBuffer = document.output('arraybuffer');
+        const doc = document.output();
 
-        api.checkout(docBuffer);
+        api.checkout(doc);
+    };
+
+    resetCheckout = () => {
+        const {store} = this.props;
+
+        store.resetCheckout();
     };
 
     @computed
@@ -72,6 +78,7 @@ class Order extends Component {
                        checkoutState={this.checkoutState}
                        htmlDocRef={this.htmlDocRef}
                        checkoutOrder={this.checkoutOrder}
+                       resetCheckout={this.resetCheckout}
                        total={this.total}/>
         );
     }

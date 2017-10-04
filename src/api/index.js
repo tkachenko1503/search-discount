@@ -3,7 +3,7 @@ import {fromPromise} from 'mobx-utils';
 import store from '../store';
 import Parse from './Parse';
 import Modification from '../models/Modification';
-import {normalizeModifications, catchErrors} from './utils';
+import {normalizeModifications, throwOnError} from './utils';
 
 export class Api {
     constructor(store) {
@@ -27,14 +27,16 @@ export class Api {
             .then(entities => this._store.resetEntities(entities));
     }
 
-    checkout(buffer) {
+    checkout(source) {
         const request = fetch('http://localhost:8090/checkout', {
             method: "POST",
-            body: buffer
+            body: source
         })
-            .then(catchErrors);
+            .then(throwOnError);
 
         const checkoutstate = fromPromise(request);
+
+        checkoutstate.catch(error => console.log('checkout error'));
 
         this._store.setCheckout(checkoutstate);
     }

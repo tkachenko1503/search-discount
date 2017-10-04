@@ -3,7 +3,9 @@ import path from 'path';
 import {ParseServer} from 'parse-server';
 import ParseDashboard from 'parse-dashboard';
 import morgan from 'morgan';
+import cors from 'cors';
 
+import mailer from './mailer';
 import config from './config.json';
 
 const DEVELOP = 'develop';
@@ -63,6 +65,7 @@ const catchError = (err, req, res) => {
 // setup for different env
 if (NODE_ENV === DEVELOP) {
     app.use(morgan('dev'));
+    app.use(cors());
     app.use(express.static(path.resolve('build/')));
 } else {
     app.use(morgan('combined'));
@@ -73,13 +76,7 @@ if (NODE_ENV === DEVELOP) {
 app.use('/parse', parse);
 app.use('/admin/dashboard', dashboard);
 
-app.use('/checkout', (req, res) => {
-    setTimeout(() => {
-        res
-            .status(404)
-            .end();
-    }, 2000);
-});
+app.use('/checkout', mailer);
 
 app.use('/*', (req, res) => {
     res.sendFile(path.resolve('build', 'index.html'));

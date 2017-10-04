@@ -18,7 +18,7 @@ const SearchPage = () => {
             'container-fluid',
             styles.search
         )}>
-            <DevTools/>
+            {/*<DevTools/>*/}
 
             <div className={styles.searchContent}>
                 <h1 className={styles.searchLogo}>

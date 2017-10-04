@@ -31,6 +31,12 @@ class Store {
     setCheckout(state) {
         this.checkoutState = state;
     }
+
+    @action
+    resetCheckout() {
+        this.checkoutState = null;
+        this.orderItems = {};
+    }
 }
 
 export default new Store();
