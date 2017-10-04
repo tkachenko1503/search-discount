@@ -73,6 +73,14 @@ if (NODE_ENV === DEVELOP) {
 app.use('/parse', parse);
 app.use('/admin/dashboard', dashboard);
 
+app.use('/checkout', (req, res) => {
+    setTimeout(() => {
+        res
+            .status(404)
+            .end();
+    }, 2000);
+});
+
 app.use('/*', (req, res) => {
     res.sendFile(path.resolve('build', 'index.html'));
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-// import DevTools from 'mobx-react-devtools';
+import DevTools from 'mobx-react-devtools';
 import cn from 'classnames';
 
 import CategoryList from '../CategoryList';
@@ -18,7 +18,7 @@ const SearchPage = () => {
             'container-fluid',
             styles.search
         )}>
-            {/*<DevTools/>*/}
+            <DevTools/>
 
             <div className={styles.searchContent}>
                 <h1 className={styles.searchLogo}>

@@ -8,3 +8,11 @@ const jsonifyCollection = map(jsonify);
 
 export const normalizeModifications = modifications =>
     normalize(jsonifyCollection(modifications), entitiesSchema);
+
+export const catchErrors = response => {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+
+    return response;
+};

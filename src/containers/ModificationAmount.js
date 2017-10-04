@@ -15,6 +15,10 @@ class ModificationAmount extends Component {
         const {store, modificationId} = this.props;
         const amount = parseInt(event.target.value, 10);
 
+        if (amount < 0) {
+            return;
+        }
+
         store.addOrderItem(modificationId, amount);
     };
 

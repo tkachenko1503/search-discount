@@ -1,7 +1,9 @@
+import {fromPromise} from 'mobx-utils';
+
 import store from '../store';
 import Parse from './Parse';
 import Modification from '../models/Modification';
-import {normalizeModifications} from './utils';
+import {normalizeModifications, catchErrors} from './utils';
 
 export class Api {
     constructor(store) {
@@ -23,6 +25,18 @@ export class Api {
             .find()
             .then(normalizeModifications)
             .then(entities => this._store.resetEntities(entities));
+    }
+
+    checkout(buffer) {
+        const request = fetch('http://localhost:8090/checkout', {
+            method: "POST",
+            body: buffer
+        })
+            .then(catchErrors);
+
+        const checkoutstate = fromPromise(request);
+
+        this._store.setCheckout(checkoutstate);
     }
 
     isAuthenticated() {

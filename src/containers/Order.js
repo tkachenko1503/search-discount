@@ -9,13 +9,33 @@ import values from 'ramda/src/values';
 import omit from 'ramda/src/omit';
 import pathOr from 'ramda/src/pathOr';
 
+import {htmlToPdf} from '../documents';
+import api from '../api';
+
 const keysLength = pipe(keys, length);
 const modifications = pathOr([], ['entities', 'modification']);
 const orderItems = pathOr([], ['orderItems']);
+const state = pathOr(null, ['checkoutState', 'state']);
 
 @inject('store')
 @observer
 class Order extends Component {
+    htmlDocRef = node => this.htmlDoc = node;
+
+    checkoutOrder = () => {
+        const document = htmlToPdf(this.htmlDoc);
+        const docBuffer = document.output('arraybuffer');
+
+        api.checkout(docBuffer);
+    };
+
+    @computed
+    get checkoutState() {
+        const {store} = this.props;
+
+        return state(store);
+    };
+
     @computed
     get total() {
         const {store} = this.props;
@@ -49,6 +69,9 @@ class Order extends Component {
 
         return (
             <Component {...props}
+                       checkoutState={this.checkoutState}
+                       htmlDocRef={this.htmlDocRef}
+                       checkoutOrder={this.checkoutOrder}
                        total={this.total}/>
         );
     }

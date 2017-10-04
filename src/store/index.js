@@ -4,11 +4,7 @@ import assoc from 'ramda/src/assoc';
 class Store {
     @observable entities = {};
     @observable orderItems = {};
-
-    @action
-    resetProducts(newProducts) {
-        this.products = newProducts;
-    }
+    @observable checkoutState = null;
 
     @action
     resetEntities({entities}) {
@@ -29,6 +25,11 @@ class Store {
 
             this.orderItems = assoc(modificationId, newItem, this.orderItems);
         }
+    }
+
+    @action
+    setCheckout(state) {
+        this.checkoutState = state;
     }
 }
 
