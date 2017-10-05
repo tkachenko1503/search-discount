@@ -4,7 +4,7 @@ import Mailgun from 'mailgun-js';
 const api_key = 'key-cca1797ff1161d62a7762a7ecfdef211';
 const domain = 'sandboxb18a1c4228724fd9a1f91b3001a71dc9.mailgun.org';
 const from_who = 'beton@beneton.com';
-const adminEmail = 're4thzdsq@gmail.com';
+const adminEmail = 'sn@insidecrm.pro';
 
 const mailer = express.Router();
 const mailgun = new Mailgun({
