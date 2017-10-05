@@ -28,7 +28,7 @@ export class Api {
     }
 
     checkout(source) {
-        const request = fetch('http://localhost:8090/checkout', {
+        const request = fetch('/checkout', {
             method: "POST",
             body: source
         })
