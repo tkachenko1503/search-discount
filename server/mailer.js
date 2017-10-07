@@ -10,22 +10,17 @@ let domain;
 let from_who;
 let adminEmail;
 
-// if (process.env.NODE_ENV === 'production') {
-//     api_key = MAILER.PROD.API_KEY;
-//     domain = MAILER.PROD.DOMAIN;
-//     from_who = MAILER.PROD.FROM;
-//     adminEmail = MAILER.PROD.ADMIN;
-// } else {
-//     api_key = MAILER.DEV.API_KEY;
-//     domain = MAILER.DEV.DOMAIN;
-//     from_who = MAILER.DEV.FROM;
-//     adminEmail = MAILER.DEV.ADMIN;
-// }
-
-api_key = MAILER.DEV.API_KEY;
-domain = MAILER.DEV.DOMAIN;
-from_who = MAILER.DEV.FROM;
-adminEmail = MAILER.DEV.ADMIN;
+if (process.env.NODE_ENV === 'production') {
+    api_key = MAILER.PROD.API_KEY;
+    domain = MAILER.PROD.DOMAIN;
+    from_who = MAILER.PROD.FROM;
+    adminEmail = MAILER.PROD.ADMIN;
+} else {
+    api_key = MAILER.DEV.API_KEY;
+    domain = MAILER.DEV.DOMAIN;
+    from_who = MAILER.DEV.FROM;
+    adminEmail = MAILER.DEV.ADMIN;
+}
 
 const mailer = express.Router();
 const mailgun = new Mailgun({
