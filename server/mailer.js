@@ -1,5 +1,6 @@
 import express from 'express';
 import Mailgun from 'mailgun-js';
+import fs from 'fs';
 
 import {MAILER} from './config.json';
 import {generate} from './pdf';
@@ -38,7 +39,7 @@ const data = {
     text: 'Recieve new order'
 };
 
-mailer.post('/', function (req, res, next) {
+mailer.post('/', function (req, res) {
     let html = '';
 
     req.on('data', function(chunk) {
@@ -52,13 +53,9 @@ mailer.post('/', function (req, res, next) {
                 .json({error: 'No html provided'})
         }
 
-        // @TODO insert html in template
-
         generate(html)
             .then(pdfPath => {
                 data.attachment = pdfPath;
-
-                console.log(data.attachment);
 
                 mailgun
                     .messages()
@@ -68,8 +65,13 @@ mailer.post('/', function (req, res, next) {
                                 .status(500)
                                 .json({error: error.message});
                         } else {
-                            // @TODO delete pdf
-                            res.json({email: 'OK'});
+                            res.download(pdfPath, 'order.pdf', function (error) {
+                                if (error) {
+                                    console.log(error.message);
+                                } else {
+                                    fs.unlink(pdfPath);
+                                }
+                            });
                         }
                     });
             })

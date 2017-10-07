@@ -3,7 +3,7 @@ import Loader from 'react-loader';
 import {Button, Alert} from 'react-bootstrap';
 import cn from 'classnames';
 
-import OrderItems from '../../containers/OrderItems';
+import Check from '../../containers/Check';
 import EmailCheck from '../EmailCheck'
 
 import styles from './OrderSummary.module.css';
@@ -91,8 +91,9 @@ const OrderSummary = (props) => {
         <div className={styles.summary}>
             <ContentComponent {...props}/>
 
-            <div ref={props.htmlDocRef}>
-                <OrderItems as={EmailCheck}/>
+            <div style={{display: 'none'}}
+                 ref={props.htmlDocRef}>
+                <Check as={EmailCheck}/>
             </div>
         </div>
     )
