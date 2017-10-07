@@ -15,11 +15,11 @@ class ModificationAmount extends Component {
         const {store, modificationId} = this.props;
         const amount = parseInt(event.target.value, 10);
 
-        if (amount < 0) {
-            return;
+        if (amount <= 0) {
+            store.removeOrderItem(modificationId);
+        } else {
+            store.addOrderItem(modificationId, amount);
         }
-
-        store.addOrderItem(modificationId, amount);
     };
 
     @computed

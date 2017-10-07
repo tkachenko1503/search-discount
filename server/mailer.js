@@ -1,10 +1,30 @@
 import express from 'express';
 import Mailgun from 'mailgun-js';
 
-const api_key = 'key-cca1797ff1161d62a7762a7ecfdef211';
-const domain = 'sandboxb18a1c4228724fd9a1f91b3001a71dc9.mailgun.org';
-const from_who = 'beton@beneton.com';
-const adminEmail = 'sn@insidecrm.pro';
+import {MAILER} from './config.json';
+import {generate} from './pdf';
+
+let api_key;
+let domain;
+let from_who;
+let adminEmail;
+
+// if (process.env.NODE_ENV === 'production') {
+//     api_key = MAILER.PROD.API_KEY;
+//     domain = MAILER.PROD.DOMAIN;
+//     from_who = MAILER.PROD.FROM;
+//     adminEmail = MAILER.PROD.ADMIN;
+// } else {
+//     api_key = MAILER.DEV.API_KEY;
+//     domain = MAILER.DEV.DOMAIN;
+//     from_who = MAILER.DEV.FROM;
+//     adminEmail = MAILER.DEV.ADMIN;
+// }
+
+api_key = MAILER.DEV.API_KEY;
+domain = MAILER.DEV.DOMAIN;
+from_who = MAILER.DEV.FROM;
+adminEmail = MAILER.DEV.ADMIN;
 
 const mailer = express.Router();
 const mailgun = new Mailgun({
@@ -19,33 +39,46 @@ const data = {
 };
 
 mailer.post('/', function (req, res, next) {
-    let sbuffer = '';
+    let html = '';
 
     req.on('data', function(chunk) {
-        sbuffer += chunk;
+        html += chunk;
     });
 
     req.on('end', function() {
-        if (!sbuffer.length) {
-            next();
+        if (!html.length) {
+            res
+                .status(400)
+                .json({error: 'No html provided'})
         }
 
-        const fileBuffer = Buffer.from(sbuffer);
+        // @TODO insert html in template
 
-        data.attachment = new mailgun.Attachment({
-            data: fileBuffer,
-            filename: 'order.pdf'
-        });
+        generate(html)
+            .then(pdfPath => {
+                data.attachment = pdfPath;
 
-        mailgun
-            .messages()
-            .send(data, function (error) {
-                if (error) {
-                    res.status(500).json({error : error.message});
-                } else {
-                    res.json({email : 'OK'});
-                }
+                console.log(data.attachment);
+
+                mailgun
+                    .messages()
+                    .send(data, function (error) {
+                        if (error) {
+                            res
+                                .status(500)
+                                .json({error: error.message});
+                        } else {
+                            // @TODO delete pdf
+                            res.json({email: 'OK'});
+                        }
+                    });
+            })
+            .catch(error => {
+                res
+                    .status(500)
+                    .json({error: error.message});
             });
+
     });
 });
 

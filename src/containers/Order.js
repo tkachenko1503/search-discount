@@ -9,7 +9,6 @@ import values from 'ramda/src/values';
 import omit from 'ramda/src/omit';
 import pathOr from 'ramda/src/pathOr';
 
-import {htmlToPdf} from '../documents';
 import api from '../api';
 
 const keysLength = pipe(keys, length);
@@ -23,10 +22,9 @@ class Order extends Component {
     htmlDocRef = node => this.htmlDoc = node;
 
     checkoutOrder = () => {
-        const document = htmlToPdf(this.htmlDoc);
-        const doc = document.output();
+        const orderHtmlString = this.htmlDoc.innerHTML;
 
-        api.checkout(doc);
+        api.checkout(orderHtmlString);
     };
 
     resetCheckout = () => {

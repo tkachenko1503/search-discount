@@ -7,5 +7,19 @@
   "SUPER_ADMIN": {
     "user": "GodOfBeton",
     "pass": "beton-beneton"
+  },
+  "MAILER": {
+    "DEV": {
+      "API_KEY": "key-28184ab1f7f829304e7e4df8e2af39e7",
+      "DOMAIN": "sandbox8bab496b5d234909840e58ef9b9643c2.mailgun.org",
+      "FROM": "beton@beneton.com",
+      "ADMIN": "re4thzdsq@gmail.com"
+    },
+    "PROD": {
+      "API_KEY": "key-cca1797ff1161d62a7762a7ecfdef211",
+      "DOMAIN": "sandboxb18a1c4228724fd9a1f91b3001a71dc9.mailgun.org",
+      "FROM": "beton@beneton.com",
+      "ADMIN": "sn@insidecrm.pro"
+    }
   }
 }

@@ -5,6 +5,10 @@ import Parse from './Parse';
 import Modification from '../models/Modification';
 import {normalizeModifications, throwOnError} from './utils';
 
+let host = process.env.NODE_ENV !== 'production' ?
+    'http://localhost:8090' :
+    '';
+
 export class Api {
     constructor(store) {
         this._store = store;
@@ -27,10 +31,10 @@ export class Api {
             .then(entities => this._store.resetEntities(entities));
     }
 
-    checkout(source) {
-        const request = fetch('/checkout', {
+    checkout(html) {
+        const request = fetch(`${host}/checkout`, {
             method: "POST",
-            body: source
+            body: html
         })
             .then(throwOnError);
 

@@ -3,9 +3,12 @@ import Loader from 'react-loader';
 import {Button, Alert} from 'react-bootstrap';
 import cn from 'classnames';
 
+import OrderItems from '../../containers/OrderItems';
+import EmailCheck from '../EmailCheck'
+
 import styles from './OrderSummary.module.css';
 
-const CheckoutForm = ({htmlDocRef, checkoutOrder, total}) => {
+const CheckoutForm = ({checkoutOrder, total}) => {
     return (
         <div>
             <Button type="submit"
@@ -20,10 +23,6 @@ const CheckoutForm = ({htmlDocRef, checkoutOrder, total}) => {
                 styles.clientTotal
             )}>
                 <span>Цена клиенту: {total}</span>
-            </div>
-
-            <div ref={htmlDocRef}>
-                Order YOHOHO
             </div>
         </div>
     );
@@ -91,6 +90,10 @@ const OrderSummary = (props) => {
     return (
         <div className={styles.summary}>
             <ContentComponent {...props}/>
+
+            <div ref={props.htmlDocRef}>
+                <OrderItems as={EmailCheck}/>
+            </div>
         </div>
     )
 };

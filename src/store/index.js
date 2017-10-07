@@ -1,5 +1,6 @@
 import {observable, action} from 'mobx';
 import assoc from 'ramda/src/assoc';
+import omit from 'ramda/src/omit';
 
 class Store {
     @observable entities = {};
@@ -24,6 +25,15 @@ class Store {
             });
 
             this.orderItems = assoc(modificationId, newItem, this.orderItems);
+        }
+    }
+
+    @action
+    removeOrderItem(modificationId) {
+        const item = this.orderItems[modificationId];
+
+        if (item) {
+            this.orderItems = omit([modificationId], this.orderItems);
         }
     }
 
