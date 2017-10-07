@@ -3,7 +3,7 @@ import {fromPromise} from 'mobx-utils';
 import store from '../store';
 import Parse from './Parse';
 import Modification from '../models/Modification';
-import {normalizeModifications, throwOnError} from './utils';
+import {normalizeModifications, throwOnError, openForDownload} from './utils';
 
 let host = process.env.NODE_ENV !== 'production' ?
     'http://localhost:8090' :
@@ -40,7 +40,10 @@ export class Api {
 
         const checkoutstate = fromPromise(request);
 
-        checkoutstate.catch(error => console.log('checkout error'));
+        checkoutstate
+            .then(response => response.blob())
+            .then(pdf => openForDownload(pdf))
+            .catch(error => console.log('checkout error'));
 
         this._store.setCheckout(checkoutstate);
     }

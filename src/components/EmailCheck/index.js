@@ -18,7 +18,7 @@ const ItemsTableRow = ({index, name, amount, price, itemTotal}) => (
         <td style={tdStyle}>шт.</td>
         <td style={merge(tdStyle, {textAlign: 'right', width: 70})}>{price}</td>
         <td style={merge(tdStyle, {textAlign: 'right'})}>{itemTotal}</td>
-        <td style={tdStyle}>Без ндс</td>
+        <td style={merge(tdStyle, {textAlign: 'right', width: 75})}>Без ндс</td>
     </tr>
 );
 

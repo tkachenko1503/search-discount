@@ -16,3 +16,15 @@ export const throwOnError = response => {
 
     return response;
 };
+
+export const openForDownload = pdf => {
+    const URL = window.URL || window.webkitURL;
+    const downloadUrl = URL.createObjectURL(pdf);
+
+    const link = document.createElement('a');
+
+    link.setAttribute('href', downloadUrl);
+    link.setAttribute('download', 'order.pdf');
+
+    link.click();
+};
