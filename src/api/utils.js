@@ -17,14 +17,29 @@ export const throwOnError = response => {
     return response;
 };
 
+const filename = 'order.pdf';
+
 export const openForDownload = pdf => {
-    const URL = window.URL || window.webkitURL;
-    const downloadUrl = URL.createObjectURL(pdf);
+    if (typeof window.navigator.msSaveBlob !== 'undefined') {
+        // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they
+        // were created. These URLs will no longer resolve as the data backing the URL has been freed."
+        window.navigator.msSaveBlob(pdf, filename);
+    } else {
+        const URL = window.URL || window.webkitURL;
+        const downloadUrl = URL.createObjectURL(pdf);
 
-    const link = document.createElement('a');
+        const link = document.createElement('a');
 
-    link.setAttribute('href', downloadUrl);
-    link.setAttribute('download', 'order.pdf');
+        link.setAttribute('href', downloadUrl);
+        link.setAttribute('download', filename);
 
-    link.click();
+        link.click();
+
+        // cleanup
+        setTimeout(
+            () => URL.revokeObjectURL(downloadUrl),
+            100
+        );
+    }
+
 };

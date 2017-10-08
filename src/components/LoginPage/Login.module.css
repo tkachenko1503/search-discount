@@ -2,6 +2,7 @@
     composes: beigeBack from '../../styles/color.module.css';
     composes: fullPageHeight from '../../styles/layout.module.css';
     display: flex;
+    align-items: center;
     min-width: 810px;
 }
 
