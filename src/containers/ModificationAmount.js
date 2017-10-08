@@ -15,7 +15,7 @@ class ModificationAmount extends Component {
         const {store, modificationId} = this.props;
         const amount = parseInt(event.target.value, 10);
 
-        if (amount <= 0) {
+        if (amount <= 0 || isNaN(amount)) {
             store.removeOrderItem(modificationId);
         } else {
             store.addOrderItem(modificationId, amount);
