@@ -17,9 +17,9 @@
     },
     "PROD": {
       "API_KEY": "key-cca1797ff1161d62a7762a7ecfdef211",
-      "DOMAIN": "sandboxb18a1c4228724fd9a1f91b3001a71dc9.mailgun.org",
-      "FROM": "beton@beneton.com",
-      "ADMIN": "sn@insidecrm.pro"
+      "DOMAIN": "stonetech.pro",
+      "FROM": "mail@stonetech.pro",
+      "ADMIN": "re4thzdsq@gmail.com"
     }
   }
 }

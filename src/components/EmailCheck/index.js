@@ -56,7 +56,7 @@ const ItemsTable = ({items, totalPrice, totalWeight}) => (
         <tr>
             <td colSpan={2}
                 style={{textAlign: 'right', paddingRight: 30}}>
-                Вес: {totalWeight} тонн
+                Вес: {totalWeight} тонны
             </td>
             <td colSpan={3}
                 style={{textAlign: 'right', paddingRight: 10}}>Итого

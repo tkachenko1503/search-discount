@@ -9,7 +9,9 @@ const Product = ({product}) => {
     return (
         <div>
             <div className={styles.productName}>
-                {product.name}
+                <b>
+                    {product.name}
+                </b>
             </div>
 
             <Modifications productId={product.objectId}
