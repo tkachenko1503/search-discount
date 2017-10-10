@@ -1,4 +1,4 @@
-import Parse from 'parse';
+import Parse from '../api/Parse';
 
 class Modification extends Parse.Object {
     // name = '';
@@ -11,13 +11,6 @@ class Modification extends Parse.Object {
 
     constructor() {
         super('Modification');
-    }
-
-    static queryWithEntities() {
-        const query = new Parse.Query(Modification);
-
-        return query
-            .include(['product.category']);
     }
 }
 

@@ -1,4 +1,4 @@
-import Parse from 'parse';
+import Parse from '../api/Parse';
 
 class Category extends Parse.Object {
     // name = '';

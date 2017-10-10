@@ -2,7 +2,7 @@ import {fromPromise} from 'mobx-utils';
 
 import store from '../store';
 import Parse from './Parse';
-import Modification from '../models/Modification';
+import {modificationsWithMatchedProductQuery, modificationsQuery} from './queries';
 import {normalizeModifications, throwOnError, openForDownload} from './utils';
 
 let host = process.env.NODE_ENV !== 'production' ?
@@ -15,17 +15,14 @@ export class Api {
     }
 
     findProductsByName(productName) {
-        Modification
-            .queryWithEntities()
-            .matches('name', new RegExp(productName, 'i'))
+        modificationsWithMatchedProductQuery('name', new RegExp(productName, 'i'))
             .find()
             .then(normalizeModifications)
             .then(entities => this._store.resetEntities(entities));
     }
 
     fetchEntities() {
-        Modification
-            .queryWithEntities()
+        modificationsQuery()
             .find()
             .then(normalizeModifications)
             .then(entities => this._store.resetEntities(entities));

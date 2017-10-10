@@ -1,4 +1,4 @@
-import Parse from 'parse';
+import Parse from '../api/Parse';
 
 class Product extends Parse.Object {
     // name = '';
