@@ -56,7 +56,7 @@ const ItemsTable = ({items, totalPrice, totalWeight}) => (
         <tr>
             <td colSpan={2}
                 style={{textAlign: 'right', paddingRight: 30}}>
-                Вес: {totalWeight} тонны
+                Вес: {totalWeight} кг.
             </td>
             <td colSpan={3}
                 style={{textAlign: 'right', paddingRight: 10}}>Итого
@@ -86,10 +86,6 @@ const EmailCheck = ({itemsLength, orderId, orderDate, totalPrice, totalWeight, t
             </p>
 
             <hr/>
-
-            <div style={{marginTop: 50}}>
-                Предприниматель <span>_______________________________</span> (Бакунин Д.В.)
-            </div>
 
             <div style={{marginTop: 30}}>
                 <b>ВНИМАНИЕ!!!</b>
