@@ -5,7 +5,8 @@
 }
 
 .nameField {
-    flex: 2 0 255px;
+    flex: 2 0 325px;
+    padding-right: 10px;
 }
 
 .sizeField {
@@ -13,13 +14,13 @@
 }
 
 .weightField {
-    flex: 1 0 101px;
+    flex: 1 0 100px;
 }
 
 .priceField {
-    flex: 1 0 140px;
+    flex: 1 0 100px;
 }
 
 .quantityField {
-    flex: 1 0 125px;
+    flex: 1 0 80px;
 }
