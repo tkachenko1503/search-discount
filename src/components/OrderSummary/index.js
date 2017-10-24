@@ -96,7 +96,9 @@ const OrderSummary = (props) => {
 
     return (
         <div className={styles.summary}>
-            <ContentComponent {...props}/>
+            <div className={styles.summaryContent}>
+                <ContentComponent {...props}/>
+            </div>
 
             <div style={{display: 'none'}}
                  ref={props.htmlDocRef}>
