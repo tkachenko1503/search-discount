@@ -5,7 +5,7 @@ import ParseDashboard from 'parse-dashboard';
 import morgan from 'morgan';
 import cors from 'cors';
 
-import mailer from './mailer';
+import checkout from './checkout';
 import config from './config.json';
 
 const DEVELOP = 'develop';
@@ -76,7 +76,7 @@ if (NODE_ENV === DEVELOP) {
 app.use('/parse', parse);
 app.use('/admin/dashboard', dashboard);
 
-app.use('/checkout', mailer);
+app.use('/checkout', checkout);
 
 app.use('/*', (req, res) => {
     res.sendFile(path.resolve('build', 'index.html'));

@@ -27,6 +27,12 @@ class Order extends Component {
         api.checkout(orderHtmlString);
     };
 
+    openOrderPreview = () => {
+        const orderHtmlString = this.htmlDoc.innerHTML;
+
+        api.getOrderPreview(orderHtmlString);
+    };
+
     resetCheckout = () => {
         const {store} = this.props;
 
@@ -77,6 +83,7 @@ class Order extends Component {
                        htmlDocRef={this.htmlDocRef}
                        checkoutOrder={this.checkoutOrder}
                        resetCheckout={this.resetCheckout}
+                       openOrderPreview={this.openOrderPreview}
                        total={this.total}/>
         );
     }

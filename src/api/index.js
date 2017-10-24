@@ -3,11 +3,7 @@ import {fromPromise} from 'mobx-utils';
 import store from '../store';
 import Parse from './Parse';
 import {modificationsWithMatchedProductQuery, modificationsQuery} from './queries';
-import {normalizeModifications, throwOnError, openForDownload} from './utils';
-
-let host = process.env.NODE_ENV !== 'production' ?
-    'http://localhost:8090' :
-    '';
+import {normalizeModifications, openForDownload, openInBlankTab, checkoutRequest} from './utils';
 
 export class Api {
     constructor(store) {
@@ -29,11 +25,7 @@ export class Api {
     }
 
     checkout(html) {
-        const request = fetch(`${host}/checkout`, {
-            method: "POST",
-            body: html
-        })
-            .then(throwOnError);
+        const request = checkoutRequest('issue', html);
 
         const checkoutstate = fromPromise(request);
 
@@ -43,6 +35,19 @@ export class Api {
             .catch(error => console.log('checkout error'));
 
         this._store.setCheckout(checkoutstate);
+    }
+
+    getOrderPreview(html) {
+        const request = checkoutRequest('order', html);
+
+        const checkoutstate = fromPromise(request);
+
+        checkoutstate
+            .then(response => response.blob())
+            .then(pdf => openInBlankTab(pdf))
+            .catch(error => console.log('order preview error'));
+
+        // this._store.setCheckout(checkoutstate);
     }
 
     isAuthenticated() {

@@ -3,11 +3,15 @@ import {entitiesSchema} from './schemas';
 import invoker from 'ramda/src/invoker';
 import map from 'ramda/src/map';
 
+const filename = 'order.pdf';
+let host = process.env.NODE_ENV !== 'production' ? 'http://localhost:8090' : '';
+
 const jsonify = invoker(0, 'toJSON');
 const jsonifyCollection = map(jsonify);
 
 export const normalizeModifications = modifications =>
     normalize(jsonifyCollection(modifications), entitiesSchema);
+
 
 export const throwOnError = response => {
     if (!response.ok) {
@@ -17,7 +21,24 @@ export const throwOnError = response => {
     return response;
 };
 
-const filename = 'order.pdf';
+
+const createLink = (blobData) => {
+    const URL = window.URL || window.webkitURL;
+    const dataURL = URL.createObjectURL(blobData);
+
+    const link = document.createElement('a');
+
+    link.setAttribute('href', dataURL);
+
+    // cleanup
+    setTimeout(
+        () => URL.revokeObjectURL(dataURL),
+        100
+    );
+
+    return link;
+};
+
 
 export const openForDownload = pdf => {
     if (typeof window.navigator.msSaveBlob !== 'undefined') {
@@ -25,21 +46,29 @@ export const openForDownload = pdf => {
         // were created. These URLs will no longer resolve as the data backing the URL has been freed."
         window.navigator.msSaveBlob(pdf, filename);
     } else {
-        const URL = window.URL || window.webkitURL;
-        const downloadUrl = URL.createObjectURL(pdf);
+        const link = createLink(pdf);
 
-        const link = document.createElement('a');
-
-        link.setAttribute('href', downloadUrl);
         link.setAttribute('download', filename);
-
         link.click();
-
-        // cleanup
-        setTimeout(
-            () => URL.revokeObjectURL(downloadUrl),
-            100
-        );
     }
+};
 
+
+export const openInBlankTab = pdf => {
+    const link = createLink(pdf);
+
+    link.setAttribute('target', '_blank');
+    link.click();
+};
+
+
+export const checkoutRequest = (action, body) => {
+    const url = `${host}/checkout/${action}`;
+    const data = {
+        method: "POST",
+        body
+    };
+
+    return fetch(url, data)
+        .then(throwOnError);
 };

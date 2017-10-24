@@ -8,9 +8,16 @@ import EmailCheck from '../EmailCheck'
 
 import styles from './OrderSummary.module.css';
 
-const CheckoutForm = ({checkoutOrder, total}) => {
+const CheckoutForm = ({checkoutOrder, openOrderPreview, total}) => {
     return (
         <div>
+            <Button type="submit"
+                    bsSize="large"
+                    onClick={openOrderPreview}
+                    className={styles.showOrder}>
+                Посмотреть заказ
+            </Button>
+
             <Button type="submit"
                     bsSize="large"
                     onClick={checkoutOrder}
@@ -22,7 +29,7 @@ const CheckoutForm = ({checkoutOrder, total}) => {
                 'pull-right',
                 styles.clientTotal
             )}>
-                <span>Цена клиенту: {total}</span>
+                <span>Цена розница: {total} Р</span>
             </div>
         </div>
     );
