@@ -10,9 +10,9 @@ import Category from '../Category';
 import styles from './CategoryList.module.css';
 
 const makeCategories = pipe(
-    map(category => <Category key={category.objectId} category={category}/>),
     values,
-    sortBy(prop('sort'))
+    sortBy(prop('sort')),    
+    map(category => <Category key={category.objectId} category={category}/>)
 );
 
 const CategoryList = ({categories}) => {
