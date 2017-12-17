@@ -68,10 +68,10 @@ const ItemsTable = ({items, totalPrice, totalWeight}) => (
     </Table>
 );
 
-const EmailCheck = ({itemsLength, orderId, orderDate, totalPrice, totalWeight, totalPriceText}) => {
+const EmailCheck = ({itemsLength, orderId, orderDate, totalPrice, totalWeight, totalPriceText, nickname}) => {
     return (
         <div style={{width: 900}}>
-            <h3>Счет-заказ №{orderId} от {orderDate}</h3>
+            <h3>Счет-заказ №{orderId} от {orderDate} от {nickname}</h3>
 
             <hr/>
 

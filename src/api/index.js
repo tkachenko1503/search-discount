@@ -46,8 +46,6 @@ export class Api {
             .then(response => response.blob())
             .then(pdf => openInBlankTab(pdf))
             .catch(error => console.log('order preview error'));
-
-        // this._store.setCheckout(checkoutstate);
     }
 
     isAuthenticated() {

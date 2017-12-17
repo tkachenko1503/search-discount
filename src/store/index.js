@@ -2,7 +2,13 @@ import {observable, action} from 'mobx';
 import assoc from 'ramda/src/assoc';
 import omit from 'ramda/src/omit';
 
+import Parse from '../api/Parse';
+
 class Store {
+    constructor({user}) {
+        this.user = user.toJSON();
+    }
+
     @observable entities = {};
     @observable orderItems = {};
     @observable checkoutState = null;
@@ -47,6 +53,15 @@ class Store {
         this.checkoutState = null;
         this.orderItems = {};
     }
+
+    @action
+    setUser(user) {
+        this.user = user.toJSON();
+    }
 }
 
-export default new Store();
+const defaultState = {
+    user: Parse.User.current()
+};
+
+export default new Store(defaultState);

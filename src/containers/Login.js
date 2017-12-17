@@ -22,15 +22,23 @@ class Login extends Component {
         history.push('/');
     };
 
+    setUserData = (user) => {
+        const {store} = this.props;
+
+        store.setUser(user);
+    };
+
     loginUser = (event) => {
         event.preventDefault();
 
         const form = event.target;
 
-        api.login({
-            username: path(['elements', 'username', 'value'], form),
-            password: path(['elements', 'password', 'value'], form)
-        })
+        api
+            .login({
+                username: path(['elements', 'username', 'value'], form),
+                password: path(['elements', 'password', 'value'], form)
+            })
+            .then(this.setUserData)
             .then(this.goHome)
             .fail(this.setFormError);
     };

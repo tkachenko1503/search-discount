@@ -17,12 +17,6 @@ import {numToWords} from '../utils/numbers';
 const orderItems = pathOr({}, ['orderItems']);
 const modifications = pathOr([], ['entities', 'modification']);
 
-const weights = prop('weight');
-const sumWeights = reduce(add, 0);
-const totalWeights = pipe(
-    map(weights),
-    sumWeights
-);
 const monthes = [
     'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа',
     'Сентября', 'Октября', 'Ноября', 'Декабря',
@@ -37,6 +31,7 @@ class Check extends Component {
 
         const items = orderItems(store);
         const allModifications = modifications(store);
+        const user = store.user;
         const currentDate = new Date();
         const randomNumber = Math.round(100 + Math.random() * (999 - 100));
 
@@ -50,14 +45,19 @@ class Check extends Component {
             return total + (mod.price * items[mod.objectId].amount);
         }, 0, orderModifications);
 
+        const totalWeight = reduce((total, mod) => {
+            return total + (mod.weight * items[mod.objectId].amount);
+        }, 0, orderModifications);
+
         return (
             <Component {...props}
                        itemsLength={orderModifications.length}
                        orderId={`${currentDate.toLocaleDateString()}/${randomNumber}`}
                        orderDate={`${currentDate.getDate()} ${monthes[currentDate.getMonth()]} ${currentDate.getFullYear()} г.`}
                        totalPrice={totalPrice}
-                       totalWeight={totalWeights(orderModifications)}
-                       totalPriceText={numToWords(totalPrice)}/>
+                       totalWeight={totalWeight}
+                       totalPriceText={numToWords(totalPrice)}
+                       nickname={user.nickname}/>
         );
     }
 }
