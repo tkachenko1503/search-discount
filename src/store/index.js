@@ -6,7 +6,7 @@ import Parse from '../api/Parse';
 
 class Store {
     constructor({user}) {
-        this.user = user.toJSON();
+        this.user = user && user.toJSON();
     }
 
     @observable entities = {};
