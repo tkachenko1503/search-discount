@@ -1,0 +1,16 @@
+.menu {
+    width: 200px;
+    text-align: right;
+}
+
+.menuUserIcon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.menuNickname {
+    vertical-align: middle;
+    margin-left: 10px;
+    margin-right: 12px;
+}

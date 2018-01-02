@@ -4,7 +4,9 @@ import {Button, Alert} from 'react-bootstrap';
 import cn from 'classnames';
 
 import Check from '../../containers/Check';
-import EmailCheck from '../EmailCheck'
+import EmailCheck from '../EmailCheck';
+import User from '../../containers/User';
+import UserMenu from '../UserMenu';
 
 import styles from './OrderSummary.module.css';
 
@@ -98,6 +100,10 @@ const OrderSummary = (props) => {
         <div className={styles.summary}>
             <div className={styles.summaryContent}>
                 <ContentComponent {...props}/>
+            </div>
+
+            <div className={styles.summaryUserMenu}>
+                <User as={UserMenu}/>
             </div>
 
             <div style={{display: 'none'}}

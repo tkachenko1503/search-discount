@@ -57,7 +57,7 @@ export class Api {
             .logIn(username, password);
     }
 
-    loguot() {
+    logout() {
         return Parse.User
             .logOut();
     }
