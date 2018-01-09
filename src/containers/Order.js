@@ -2,12 +2,16 @@ import React, {Component} from 'react';
 import {computed} from 'mobx';
 import {observer, inject} from 'mobx-react';
 import reduce from 'ramda/src/reduce';
+import keys from 'ramda/src/keys';
+import length from 'ramda/src/length';
+import pipe from 'ramda/src/pipe';
 import values from 'ramda/src/values';
 import omit from 'ramda/src/omit';
 import pathOr from 'ramda/src/pathOr';
 
 import api from '../api';
 
+const keysLength = pipe(keys, length);
 const modifications = pathOr([], ['entities', 'modification']);
 const orderItems = pathOr([], ['orderItems']);
 const state = pathOr(null, ['checkoutState', 'state']);
@@ -34,6 +38,13 @@ class Order extends Component {
 
         store.resetCheckout();
     };
+
+    @computed
+    get canOrder() {
+        const {store} = this.props;
+
+        return keysLength(store.orderItems) > 0;
+    }
 
     @computed
     get checkoutState() {
@@ -68,6 +79,7 @@ class Order extends Component {
                        checkoutOrder={this.checkoutOrder}
                        resetCheckout={this.resetCheckout}
                        openOrderPreview={this.openOrderPreview}
+                       canOrder={this.canOrder}
                        total={this.total}/>
         );
     }

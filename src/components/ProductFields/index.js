@@ -8,7 +8,7 @@ const ProductFields = () => {
             <div className={productFields.nameField}>Название</div>
             <div className={productFields.sizeField}>Размер мм</div>
             <div className={productFields.weightField}>Вес кг/шт</div>
-            <div className={productFields.priceField}>Ваша цена. ₽</div>
+            <div className={productFields.priceField}>Цена. ₽</div>
             <div className={productFields.quantityField}>Кол-во шт.</div>
         </div>
     );

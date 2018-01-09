@@ -11,17 +11,29 @@ export class Api {
     }
 
     findProductsByName(productName) {
-        modificationsWithMatchedProductQuery('name', new RegExp(productName, 'i'))
-            .find()
+        const request = modificationsWithMatchedProductQuery('name', new RegExp(productName, 'i'))
+            .find();
+
+        const observableRequest = fromPromise(request);
+
+        observableRequest
             .then(normalizeModifications)
             .then(entities => this._store.resetEntities(entities));
+
+        this._store.setEntitiesRequest(observableRequest);
     }
 
     fetchEntities() {
-        modificationsQuery()
-            .find()
+        const request = modificationsQuery()
+            .find();
+
+        const observableRequest = fromPromise(request);
+
+        observableRequest
             .then(normalizeModifications)
             .then(entities => this._store.resetEntities(entities));
+
+        this._store.setEntitiesRequest(observableRequest);
     }
 
     checkout(html) {
@@ -49,17 +61,28 @@ export class Api {
     }
 
     isAuthenticated() {
-        return Parse.User.current();
+        const currentUser = Parse.User.current();
+
+        if (!currentUser) {
+            return false;
+        }
+
+        return this._store.userSessionIsActive();
     }
 
     login({username, password}) {
         return Parse.User
-            .logIn(username, password);
+            .logIn(username, password)
+            .then((user) => {
+                this._store.saveUserSession();
+                return user;
+            });
     }
 
     logout() {
         return Parse.User
-            .logOut();
+            .logOut()
+            .then(this._store.resetUserSession);
     }
 }
 

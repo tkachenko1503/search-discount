@@ -6,10 +6,17 @@ import Parse from '../api/Parse';
 
 class Store {
     constructor({user}) {
-        this.user = user && user.toJSON();
+        if (user) {
+            if (this.userSessionIsActive()) {
+                this.user = user.toJSON();
+            } else {
+                Parse.User.logOut();
+            }
+        }
     }
 
     @observable entities = {};
+    @observable entitiesRequest = null;
     @observable orderItems = {};
     @observable checkoutState = null;
 
@@ -44,6 +51,11 @@ class Store {
     }
 
     @action
+    setEntitiesRequest(state) {
+        this.entitiesRequest = state;
+    }
+
+    @action
     setCheckout(state) {
         this.checkoutState = state;
     }
@@ -57,6 +69,24 @@ class Store {
     @action
     setUser(user) {
         this.user = user.toJSON();
+    }
+
+    userSessionIsActive() {
+        const now = Date.now();
+        const sessionCreated = parseInt(localStorage.getItem('user-session-created'), 10);
+        const sessionIsActive = sessionCreated > 0 && (now - sessionCreated) < 1800000;
+
+        return sessionIsActive;
+    }
+
+    saveUserSession() {
+        const now = Date.now();
+
+        localStorage.setItem('user-session-created', String(now));
+    }
+
+    resetUserSession() {
+        localStorage.setItem('user-session-created', '0');
     }
 }
 

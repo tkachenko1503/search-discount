@@ -19,6 +19,7 @@
 
 .primaryButton,
 .primaryButton:hover,
+.primaryButton[disabled]:hover,
 .primaryButton:focus,
 .primaryButton:active,
 .primaryButton:active:hover {
@@ -32,6 +33,7 @@
 
 .greyButton,
 .greyButton:hover,
+.greyButton[disabled]:hover,
 .greyButton:focus,
 .greyButton:active,
 .greyButton:active:hover {

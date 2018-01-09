@@ -10,11 +10,14 @@ import UserMenu from '../UserMenu';
 
 import styles from './OrderSummary.module.css';
 
-const CheckoutForm = ({checkoutOrder, openOrderPreview, total}) => {
+const CheckoutForm = ({checkoutOrder, openOrderPreview, total, canOrder}) => {
+    const isDisabled = !canOrder;
+
     return (
         <div>
             <Button type="submit"
                     bsSize="large"
+                    disabled={isDisabled}
                     onClick={openOrderPreview}
                     className={styles.showOrder}>
                 Посмотреть заказ
@@ -22,6 +25,7 @@ const CheckoutForm = ({checkoutOrder, openOrderPreview, total}) => {
 
             <Button type="submit"
                     bsSize="large"
+                    disabled={isDisabled}
                     onClick={checkoutOrder}
                     className={styles.checkout}>
                 Оформить заказ
