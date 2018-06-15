@@ -5,6 +5,8 @@ import Parse from './Parse';
 import {modificationsWithMatchedProductQuery, modificationsQuery} from './queries';
 import {normalizeModifications, openForDownload, openInBlankTab, checkoutRequest} from './utils';
 
+// import '../utils/fillDB';
+
 export class Api {
     constructor(store) {
         this._store = store;
